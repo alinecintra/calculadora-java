@@ -26,26 +26,13 @@ public class CalculatorControllerTest {
 
     @Test
     void calculateTestOperatorSum() {
-//        CalculatorDto calculatorDto = new CalculatorDto();
-//
-//        calculatorDto.setNumber1(2D);
-//        calculatorDto.setNumber2(2D);
-//        calculatorDto.setOperator("+");
-
-        // preparação
         ResponseEntity<?> expected = new ResponseEntity<Double>(15D, HttpStatus.OK);
 
         CalculatorDto calculatorDto = CalculatorDto.builder().operator("+").number1(number1).number2(number2).build();
-
-        // when.then
         when(calculatorService.chooseCal(number1, number2, "+")).thenReturn(15D);
-
-        // execução
         ResponseEntity<?> result = calculatorController.calculate(calculatorDto);
 
-        // validação
         assertEquals(expected, result);
-
         verify(calculatorService,times(1)).chooseCal(number1, number2, "+");
     }
 
@@ -54,13 +41,10 @@ public class CalculatorControllerTest {
         ResponseEntity<?> expected = new ResponseEntity<Double>( 5D, HttpStatus.OK);
 
         CalculatorDto calculatorDto = CalculatorDto.builder().operator("-").number1(number1).number2(number2).build();
-
         when(calculatorService.chooseCal(number1, number2,"-")).thenReturn(5D);
-
         ResponseEntity<?> result = calculatorController.calculate(calculatorDto);
 
         assertEquals(expected, result);
-
         verify(calculatorService,times(1)).chooseCal(number1, number2, "-");
     }
 
@@ -69,13 +53,10 @@ public class CalculatorControllerTest {
         ResponseEntity<?> expected = new ResponseEntity<Double>(50D, HttpStatus.OK);
 
         CalculatorDto calculatorDto = CalculatorDto.builder().operator("*").number1(number1).number2(number2).build();
-
         when(calculatorService.chooseCal(number1, number2, "*")).thenReturn(50D);
-
         ResponseEntity<?> result = calculatorController.calculate(calculatorDto);
 
         assertEquals(expected, result);
-
         verify(calculatorService,times(1)).chooseCal(number1, number2, "*");
     }
 
@@ -84,31 +65,21 @@ public class CalculatorControllerTest {
         ResponseEntity<?> expected = new ResponseEntity<Double>(5D, HttpStatus.OK);
 
         CalculatorDto calculatorDto = CalculatorDto.builder().operator("/").number1(number1).number2(number2).build();
-
         when(calculatorService.chooseCal(number1, number2, "/")).thenReturn(5D);
-
         ResponseEntity<?> result = calculatorController.calculate(calculatorDto);
 
         assertEquals(expected, result);
-
         verify(calculatorService,times(1)).chooseCal(number1, number2, "/" );
     }
 
     @Test
     void calculateTestWrongOperator() {
-
-        //preparação
         ResponseEntity<?> expected = new ResponseEntity<>("Operador inválido!", HttpStatus.BAD_REQUEST);
 
         CalculatorDto calculatorDto = CalculatorDto.builder().operator(";").number1(number1).number2(number2).build();
-
-        // execução
         ResponseEntity<?> result = calculatorController.calculate(calculatorDto);
 
-        // verificação
         assertEquals(expected, result);
-
         verify(calculatorService,times(0)).chooseCal(number1, number2, "/" );
-
     }
 }

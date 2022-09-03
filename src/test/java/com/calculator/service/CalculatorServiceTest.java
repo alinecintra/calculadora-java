@@ -20,19 +20,6 @@ public class CalculatorServiceTest {
     Double number2 = 5D;
 
     @Test
-    void alineTeste() {
-        // preparação do teste: inicializamos as variáveis ou mockamos.
-        Double expected = 15D;
-
-        // execução do que queremos testar.
-        Double result = number1 + number2;
-
-        // Validação do resultado obtido com o resultado esperado.
-        assertEquals(expected, result);
-
-    }
-
-    @Test
     void sumTest() {
         Double expected = 15D;
 
@@ -82,56 +69,43 @@ public class CalculatorServiceTest {
 
     @Test
     void chooseCalTestSum() {
-        // preparação
         Double expected = 15D;
         String operator = "+";
 
-        // execução
         Double result = calculatorService.chooseCal(number1, number2, operator);
 
-        // verificação
         assertEquals(expected, result);
-
         verify(calculatorService, times(1)).sum(anyDouble(), anyDouble());
 
     }
 
     @Test
     void chooseCalTestSubtraction() {
-        // preparação
         Double expected = 5D;
         String operator = "-";
 
-        // execução
         Double result = calculatorService.chooseCal(number1, number2, operator);
 
-        // verificação
         assertEquals(expected, result);
     }
 
     @Test
     void chooseCalTestMultiplication() {
-        // preparação
         Double expected = 50D;
         String operator = "*";
 
-        // execução
         Double result = calculatorService.chooseCal(number1, number2, operator);
 
-        // verificação
         assertEquals(expected, result);
     }
 
     @Test
     void chooseCalTestDivision() {
-        // preparação
         Double expected = 2D;
         String operator = "/";
 
-        // execução
         Double result = calculatorService.chooseCal(number1, number2, operator);
 
-        // verificação
         assertEquals(expected, result);
     }
 
@@ -146,6 +120,4 @@ public class CalculatorServiceTest {
 
         verify(calculatorService, never()).sum(anyDouble(), anyDouble());
     }
-
-
 }
